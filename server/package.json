@@ -1,0 +1,16 @@
+{
+  "name": "oddle_server_test",
+  "version": "1.0.0",
+  "description": "Oddle test",
+  "main": "index.js",
+  "scripts": {
+    "start": "pm2 start ecosystem.config.js"
+  },
+  "author": "Nguyen Dang Khoa <ndkhoa.khtn@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3",
+    "pm2": "^2.5.0"
+  },
+  "devDependencies": {}
+}
