@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "webpack_dev": "webpack --config webpack.dev.config.js --watch",
-    "webpack_main": "webpack --config webpack.prod.config.js",
+    "webpack_main": "webpack --config webpack.prod.config.js --watch",
     "dev-server": "webpack-dev-server --config webpack.dev.config.js --watch"
   },
   "keywords": [

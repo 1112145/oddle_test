@@ -31693,7 +31693,7 @@ var OddleTestApp = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (OddleTestApp.__proto__ || Object.getPrototypeOf(OddleTestApp)).call(this, props));
 
-        if (_this.props.users.length == 0) {
+        if (_this.props.users) {
             _axios2.default.get(api).then(function (result) {
                 _this.props.dispatch((0, _actions.setUsers)(result.data.items));
             });

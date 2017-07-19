@@ -1,6 +1,6 @@
 var path = require("path");
 var webpack = require('webpack');
-
+const env = process.env.NODE_ENV || 'development';
 
 module.exports = {
     entry: [
@@ -10,6 +10,10 @@ module.exports = {
         path: path.join(__dirname, '../server/html/'),
         publicPath: path.join(__dirname, '../server/html/'),
         filename: 'bundle.js'
+    },
+    externals: {
+        react: "React",
+        redux: "Redux"
     },
     module: {
         rules: [
@@ -32,13 +36,21 @@ module.exports = {
     },
     resolve: {
         alias: {
-           actions: path.resolve(__dirname, 'src/acrions/'), 
-           components: path.resolve(__dirname, 'src/components/'),
-           containers: path.resolve(__dirname, 'src/containers/'),
-           reducers: path.resolve(__dirname, 'src/reducers/'),
+            actions: path.resolve(__dirname, 'src/acrions/'),
+            components: path.resolve(__dirname, 'src/components/'),
+            containers: path.resolve(__dirname, 'src/containers/'),
+            reducers: path.resolve(__dirname, 'src/reducers/'),
         },
         extensions: ['.js', '.jsx']
     },
-    plugins: []
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                unused: true,
+                dead_code: true,
+                warnings: false,
+            },
+        })
+    ]
 };
 

@@ -13,8 +13,7 @@ class OddleTestApp extends Component {
 
     constructor(props) {
         super(props);
-
-        if (this.props.users.length == 0) {
+        if (this.props.users) {
             axios.get(api).then((result) => {
                 this.props.dispatch(setUsers(result.data.items));
             });
