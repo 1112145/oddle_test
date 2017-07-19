@@ -39,8 +39,6 @@ class Detail extends Component {
                             <Divider horizontal inverted>REPOSITORIES</Divider>
                             <Container>{this.renderRepositories()}</Container>
                         </Grid.Row>
-
-
                     </Grid.Column>
                 </Grid>
             </div>
