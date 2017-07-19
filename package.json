@@ -1,19 +1,16 @@
 {
-  "name": "oddle_test",
+  "name": "oddle_server_test",
   "version": "1.0.0",
-  "description": "",
+  "description": "Oddle test",
   "main": "index.js",
   "scripts": {
-    "start": "cd ./server && npm start"
+    "start": "pm2 start ./server/ecosystem.config.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/1112145/oddle_test.git"
-  },
-  "author": "Nguyen Dang Khoa",
+  "author": "Nguyen Dang Khoa <ndkhoa.khtn@gmail.com>",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/1112145/oddle_test/issues"
+  "dependencies": {
+    "express": "^4.15.3",
+    "pm2": "^2.5.0"
   },
-  "homepage": "https://github.com/1112145/oddle_test#readme"
+  "devDependencies": {}
 }
