@@ -15385,10 +15385,10 @@ function setUsers(users) {
     };
 }
 
-function setUserDetail(user_detail) {
+function setUserDetail(detail) {
     return {
         type: 'SET_USER_DETAIL',
-        user_detail: user_detail
+        detail: detail
     };
 }
 
@@ -30753,15 +30753,16 @@ var _reactRedux = __webpack_require__(137);
 
 var _redux = __webpack_require__(376);
 
-var _index = __webpack_require__(494);
+var _reducers = __webpack_require__(494);
 
-var _index2 = _interopRequireDefault(_index);
+var _reducers2 = _interopRequireDefault(_reducers);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var store = (0, _redux.createStore)(_index2.default, (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default), window.devToolsExtension ? window.devToolsExtension() : function (f) {
+var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default), window.devToolsExtension ? window.devToolsExtension() : function (f) {
     return f;
 }));
+
 (0, _reactDom.render)(_react2.default.createElement(
     _reactRedux.Provider,
     { store: store },
@@ -31846,6 +31847,10 @@ var _reactRedux = __webpack_require__(137);
 
 var _semanticUiReact = __webpack_require__(230);
 
+var _axios = __webpack_require__(470);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31854,31 +31859,101 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var style = {
+    avatar: { maxWidth: '128px' },
+    listItem: { padding: '10px' }
+};
+
 var Detail = function (_Component) {
     _inherits(Detail, _Component);
 
-    function Detail() {
+    function Detail(props) {
         _classCallCheck(this, Detail);
 
-        return _possibleConstructorReturn(this, (Detail.__proto__ || Object.getPrototypeOf(Detail)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Detail.__proto__ || Object.getPrototypeOf(Detail)).call(this, props));
+
+        _this.state = {
+            detail: _this.props.detail,
+            repositories: [{ clone_url: "http://example.com" }, { clone_url: "http://example.com" }, { clone_url: "http://example.com" }]
+        };
+        return _this;
     }
 
     _createClass(Detail, [{
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                _semanticUiReact.Grid,
+                'div',
                 null,
                 _react2.default.createElement(
-                    _semanticUiReact.Grid.Column,
-                    { computer: 8, tablet: 6, mobile: 16, verticalAlign: 'middle' },
+                    _semanticUiReact.Grid,
+                    { centered: true, verticalAlign: 'middle' },
                     _react2.default.createElement(
-                        _semanticUiReact.Grid.Row,
-                        null,
-                        _react2.default.createElement(_semanticUiReact.Image, { src: this.props.detail.avatar_url })
+                        _semanticUiReact.Grid.Column,
+                        { computer: 8, tablet: 6, mobile: 16, verticalAlign: 'middle' },
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid.Row,
+                            null,
+                            _react2.default.createElement(_semanticUiReact.Image, { className: 'center',
+                                shape: 'circular',
+                                style: style.avatar,
+                                src: this.state.detail.avatar_url || 'https://image.flaticon.com/icons/svg/145/145843.svg' }),
+                            _react2.default.createElement(
+                                _semanticUiReact.Header,
+                                { as: 'h1', color: 'teal', inverted: true },
+                                this.state.detail.login || 'Nguyen Dang Khoa'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            _semanticUiReact.Divider,
+                            { horizontal: true, inverted: true },
+                            'INFORMATION'
+                        ),
+                        _react2.default.createElement(
+                            _semanticUiReact.Divider,
+                            { horizontal: true, inverted: true },
+                            'REPOSITORIES'
+                        ),
+                        _react2.default.createElement(
+                            _semanticUiReact.Container,
+                            null,
+                            this.renderRepositories()
+                        )
                     )
                 )
             );
+        }
+    }, {
+        key: 'renderInformation',
+        value: function renderInformation() {}
+    }, {
+        key: 'renderRepositories',
+        value: function renderRepositories() {
+            var items = [];
+            this.state.repositories.forEach(function (item, index) {
+                items.push(_react2.default.createElement(
+                    _semanticUiReact.List.Item,
+                    { key: index, verticalAlign: 'middle', style: style.listItem },
+                    _react2.default.createElement(_semanticUiReact.List.Icon, { name: 'github', inverted: true }),
+                    _react2.default.createElement(
+                        _semanticUiReact.List.Content,
+                        { as: 'a' },
+                        item.clone_url
+                    )
+                ));
+            });
+            return _react2.default.createElement(
+                _semanticUiReact.List,
+                null,
+                items
+            );
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _axios2.default.get(this.props.detail.repos_url).then(function (res) {
+                this.setState({ repositories: res.data });
+            }.bind(this));
         }
     }]);
 
@@ -31930,9 +32005,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var logoLink = 'https://static1.squarespace.com/static/568a1a4c4bf118b4ed6264a3/t/568a231e05f8e23aa29302fa/1499681692304/?format=1500w';
 
-var style = {
-    row: { padding: '20px' }
-};
+var style = { row: { padding: '20px' } };
 
 var MainView = function (_Component) {
     _inherits(MainView, _Component);
@@ -32032,23 +32105,33 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-exports.default = function () {
+var _redux = __webpack_require__(376);
+
+function users() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     var action = arguments[1];
 
     switch (action.type) {
         case 'SET_USERS':
-            return {
-                users: action.users
-            };
-        case 'SET_USER_DETAIL':
-            return {
-                user: action.user_detail
-            };
+            return Object.assign({}, action.users);
         default:
             return state;
     }
-};
+}
+
+function user() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var action = arguments[1];
+
+    switch (action.type) {
+        case 'SET_USER_DETAIL':
+            return Object.assign({}, action.detail);
+        default:
+            return state;
+    }
+}
+
+exports.default = (0, _redux.combineReducers)({ users: users, user: user });
 
 /***/ }),
 /* 495 */

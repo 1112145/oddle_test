@@ -8,9 +8,7 @@ import './style.scss';
 
 const logoLink = 'https://static1.squarespace.com/static/568a1a4c4bf118b4ed6264a3/t/568a231e05f8e23aa29302fa/1499681692304/?format=1500w';
 
-const style = {
-    row: { padding: '20px' }
-}
+const style = { row: { padding: '20px' }}
 
 class MainView extends Component {
     render() {

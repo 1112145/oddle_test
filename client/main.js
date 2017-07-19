@@ -4,7 +4,9 @@ import App from './src/app.js';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
-import reducers from './src/reducers/index.js';
+import reducers from './src/reducers';
+
+
 let store = createStore(
     reducers,
     compose(
@@ -12,6 +14,7 @@ let store = createStore(
         window.devToolsExtension ? window.devToolsExtension() : f => f
     )
 );
+
 render(
     <Provider store={store}>
         <App />

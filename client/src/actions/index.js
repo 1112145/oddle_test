@@ -5,9 +5,9 @@ export function setUsers(users) {
     }
 }
 
-export function setUserDetail(user_detail){
+export function setUserDetail(detail){
     return {
         type: 'SET_USER_DETAIL',
-        user_detail
+        detail
     }
 }
