@@ -38,7 +38,7 @@ class SearchBox extends Component {
 
     onSearch(event, data) {
         this.setState({ isLoading: true, value: data.value })
-
+        if(this.props.onSearch) this.props.onSearch.call(this,data);
         setTimeout(() => {
             if (this.state.value.length < 1) return this.reset()
 

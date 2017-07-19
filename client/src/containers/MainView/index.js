@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Image, Grid } from 'semantic-ui-react';
 import { setUserDetail } from '../../actions';
+import { setUsers } from '../../actions';
 import { SearchBox } from '../../components';
 import './style.scss';
+import axios from 'axios';
 
 
 const logoLink = 'https://static1.squarespace.com/static/568a1a4c4bf118b4ed6264a3/t/568a231e05f8e23aa29302fa/1499681692304/?format=1500w';
+const api = 'https://api.github.com/search/users?q=';
 
-const style = { row: { padding: '20px' }}
+const style = { row: { padding: '20px' } }
 
 class MainView extends Component {
     render() {
@@ -21,13 +24,19 @@ class MainView extends Component {
                         </Grid.Row>
                         <Grid.Row style={style.row}>
                             <Container>
-                                <SearchBox items={this.props.users} onItemSelect={this.onSelectUser.bind(this)} />
+                                <SearchBox onSearch={this.onSearch.bind(this)} items={this.props.users} onItemSelect={this.onSelectUser.bind(this)} />
                             </Container>
                         </Grid.Row>
                     </Grid.Column>
                 </Grid>
             </div>
         );
+    }
+
+    onSearch(data) {
+        axios.get(api + data.value).then((result) => {
+            this.props.dispatch(setUsers(result.data.items));
+        });
     }
 
     onSelectUser(user) {
