@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Image, Grid, Divider, Header, List } from 'semantic-ui-react';
+import { Container, Image, Grid, Divider, Header, List, Label } from 'semantic-ui-react';
+import _ from 'lodash';
 
 import axios from 'axios';
 
 const style = {
     avatar: { maxWidth: '128px' },
-    listItem: { padding: '10px'}
+    listItem: { padding: '10px' }
 }
 
 
@@ -18,7 +19,7 @@ class Detail extends Component {
 
         this.state = {
             detail: this.props.detail,
-            repositories: [{ clone_url: "http://example.com" }, { clone_url: "http://example.com" }, { clone_url: "http://example.com" },]
+            repositories: []
         }
     }
 
@@ -35,6 +36,7 @@ class Detail extends Component {
                             <Header as='h1' color='teal' inverted>{this.state.detail.login || 'Nguyen Dang Khoa'}</Header>
                         </Grid.Row>
                         <Divider horizontal inverted>INFORMATION</Divider>
+                        <Container>{this.renderInformation()}</Container>
                         <Divider horizontal inverted>REPOSITORIES</Divider>
                         <Container>{this.renderRepositories()}</Container>
                     </Grid.Column>
@@ -45,6 +47,19 @@ class Detail extends Component {
     }
 
     renderInformation() {
+        var keys = Object.keys(this.state.detail);
+        var items = [];
+        keys.forEach((key, index) => {
+            items.push(<List.Item key={index} verticalAlign='middle' style={style.listItem}>
+                <List.Icon name="circle" inverted color='green'/>
+                <List.Content >
+                    <Header as='h3' color='yellow' textAlign='left'>{key.toUpperCase()}</Header>
+                    <Header as='h5' color='teal' textAlign='left'>{(!_.isEmpty(this.state.detail[key]))?this.state.detail[key]:'NONE'}</Header>
+                </List.Content>
+            </List.Item>)
+        });
+
+        return <List>{items}</List>
 
     }
 

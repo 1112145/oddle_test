@@ -14,15 +14,18 @@ class OddleTestApp extends Component {
     constructor(props) {
         super(props);
 
-        axios.get(api).then((result) => {
-            this.props.dispatch(setUsers(result.data.items));
-        });
+        if (this.props.users.length == 0) {
+            axios.get(api).then((result) => {
+                this.props.dispatch(setUsers(result.data.items));
+            });
+        }
+
     }
 
 
     render() {
         return (
-            <Router ref={(router)=> window.router = router}>
+            <Router ref={(router) => window.router = router}>
                 <div>
                     <Route exact path='/' component={MainView}></Route>
                     <Route exact path='/detail' component={Detail}></Route>
@@ -33,4 +36,8 @@ class OddleTestApp extends Component {
     }
 }
 
-export default connect()(OddleTestApp);
+const mapStateToProps = (state) => {
+    return { users: state.users }
+}
+
+export default connect(mapStateToProps)(OddleTestApp);
