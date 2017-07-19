@@ -8,6 +8,9 @@ import './style.scss';
 import axios from 'axios';
 
 
+
+
+
 const logoLink = 'https://static1.squarespace.com/static/568a1a4c4bf118b4ed6264a3/t/568a231e05f8e23aa29302fa/1499681692304/?format=1500w';
 const api = 'https://api.github.com/search/users?q=';
 
@@ -24,7 +27,7 @@ class MainView extends Component {
                         </Grid.Row>
                         <Grid.Row style={style.row}>
                             <Container>
-                                <SearchBox onSearch={this.onSearch.bind(this)} items={this.props.users} onItemSelect={this.onSelectUser.bind(this)} />
+                                <SearchBox ref={(search) => { this.search = search }} onSearch={this.onSearch.bind(this)} items={this.props.users} onItemSelect={this.onSelectUser.bind(this)} />
                             </Container>
                         </Grid.Row>
                     </Grid.Column>
@@ -36,6 +39,7 @@ class MainView extends Component {
     onSearch(data) {
         axios.get(api + data.value).then((result) => {
             this.props.dispatch(setUsers(result.data.items));
+            this.search.intellisense();
         });
     }
 

@@ -38,18 +38,17 @@ class SearchBox extends Component {
 
     onSearch(event, data) {
         this.setState({ isLoading: true, value: data.value })
-        if(this.props.onSearch) this.props.onSearch.call(this,data);
-        setTimeout(() => {
-            if (this.state.value.length < 1) return this.reset()
+        if (this.props.onSearch) this.props.onSearch.call(this, data);
+    }
 
-            const re = new RegExp(_.escapeRegExp(this.state.value), 'i');
-            const isMatch = (result) => re.test(result.login);
+    intellisense = function () {
+        const re = new RegExp(_.escapeRegExp(this.state.value), 'i');
+        const isMatch = (result) => re.test(result.login);
 
-            this.setState({
-                isLoading: false,
-                results: _.filter(this.props.items, isMatch),
-            })
-        }, 500)
+        this.setState({
+            isLoading: false,
+            results: _.filter(this.props.items, isMatch),
+        })
     }
 
     onItemSelect(event, data) {

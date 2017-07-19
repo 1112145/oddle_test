@@ -5,6 +5,7 @@ export function setUsers(users) {
     }
 }
 
+
 export function setUserDetail(detail){
     return {
         type: 'SET_USER_DETAIL',
