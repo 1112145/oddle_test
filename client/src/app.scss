@@ -1,3 +1,13 @@
 body {
-    background-color: #34495e;
+    background-color: #555;
+}
+
+.grid {
+    margin: 0px!important;
+}
+
+.center {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }

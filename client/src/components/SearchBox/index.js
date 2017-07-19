@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
-import { Search, Image, Container } from 'semantic-ui-react';
+import { Search, Container } from 'semantic-ui-react';
+
 
 class SearchBox extends Component {
 
@@ -21,12 +22,17 @@ class SearchBox extends Component {
 
     render() {
         return (
-            <Search results={this.state.results}  fluid onResultSelect={this.onItemSelect} 
-                    onSearchChange={this.onSearch.bind(this)} resultRenderer={this.resultRender}/>
+            <Search input={{ style: { width: '100%' } }}
+                style={this.props.style}
+                results={this.state.results}
+                placeholder='Enter an username'
+                onResultSelect={this.onItemSelect.bind(this)}
+                onSearchChange={this.onSearch.bind(this)}
+                resultRenderer={this.resultRender.bind(this)} fluid />
         );
     }
 
-    resultRender({id,avatar_url,login}) {
+    resultRender({ id, avatar_url, login }) {
         return <Search.Result id={id} image={avatar_url} title={login}></Search.Result>
     }
 
@@ -46,8 +52,8 @@ class SearchBox extends Component {
         }, 500)
     }
 
-    onItemSelect(e,result){
-        console.log(result);
+    onItemSelect(event, data) {
+        if (this.props.onItemSelect) this.props.onItemSelect.call(this, data.result);
     }
 
     reset() {

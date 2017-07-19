@@ -4,6 +4,10 @@ export default (state = {}, action) => {
             return {
                 users: action.users
             }
+        case 'SET_USER_DETAIL':
+            return {
+                user: action.user_detail
+            }
         default: return state;
     }
 }

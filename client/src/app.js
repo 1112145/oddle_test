@@ -22,7 +22,7 @@ class OddleTestApp extends Component {
 
     render() {
         return (
-            <Router>
+            <Router ref={(router)=> window.router = router}>
                 <div>
                     <Route exact path='/' component={MainView}></Route>
                     <Route exact path='/detail' component={Detail}></Route>

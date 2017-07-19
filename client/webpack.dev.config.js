@@ -13,7 +13,8 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, 'html/'),
         compress: true,
-        port: 8000
+        port: 8000,
+        historyApiFallback: true
     },
     module: {
         rules: [
