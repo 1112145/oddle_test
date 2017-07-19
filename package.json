@@ -4,13 +4,13 @@
   "description": "Oddle test",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start ./server/ecosystem.config.js"
+    "start": "nodemon ./server/server.js --watch"
   },
   "author": "Nguyen Dang Khoa <ndkhoa.khtn@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.3",
-    "pm2": "^2.5.0"
+    "nodemon": "^1.11.0"
   },
   "devDependencies": {}
 }
