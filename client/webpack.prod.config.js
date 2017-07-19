@@ -1,6 +1,6 @@
 var path = require("path");
 var webpack = require('webpack');
-const env = process.env.NODE_ENV || 'development';
+
 
 module.exports = {
     entry: [
@@ -12,8 +12,12 @@ module.exports = {
         filename: 'bundle.js'
     },
     externals: {
-        react: "React",
-        redux: "Redux"
+        'react': "React",
+        'redux': "Redux",
+        'semantic-ui-react': 'semanticUIReact',
+        'react-router-dom': 'ReactRouterDOM',
+        'axios': 'axios',
+        'redux-thunk': 'ReduxThunk'
     },
     module: {
         rules: [
@@ -50,7 +54,6 @@ module.exports = {
                 dead_code: true,
                 warnings: false,
             },
-        })
-    ]
+        })]
 };
 
