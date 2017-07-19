@@ -31671,6 +31671,8 @@ var _reactRouterDom = __webpack_require__(853);
 
 var _actions = __webpack_require__(252);
 
+var _components = __webpack_require__(490);
+
 var _containers = __webpack_require__(493);
 
 __webpack_require__(963);
@@ -31706,15 +31708,20 @@ var OddleTestApp = function (_Component) {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                _reactRouterDom.BrowserRouter,
-                { ref: function ref(router) {
-                        return window.router = router;
-                    } },
+                'div',
+                null,
+                _react2.default.createElement(_components.NavBar, null),
                 _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _containers.MainView }),
-                    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/detail', component: _containers.Detail })
+                    _reactRouterDom.BrowserRouter,
+                    { ref: function ref(router) {
+                            return window.router = router;
+                        } },
+                    _react2.default.createElement(
+                        'div',
+                        { style: { marginTop: '64px' } },
+                        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _containers.MainView }),
+                        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/detail', component: _containers.Detail })
+                    )
                 )
             );
         }
@@ -31859,6 +31866,15 @@ Object.defineProperty(exports, 'SearchBox', {
   }
 });
 
+var _NavBar = __webpack_require__(990);
+
+Object.defineProperty(exports, 'NavBar', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_NavBar).default;
+  }
+});
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
@@ -31923,16 +31939,16 @@ var Detail = function (_Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'center' },
                 _react2.default.createElement(
                     _semanticUiReact.Grid,
-                    { centered: true, verticalAlign: 'middle' },
+                    { className: 'center', centered: true, verticalAlign: 'middle' },
                     _react2.default.createElement(
                         _semanticUiReact.Grid.Column,
                         { computer: 8, tablet: 6, mobile: 16, verticalAlign: 'middle' },
                         _react2.default.createElement(
                             _semanticUiReact.Grid.Row,
-                            null,
+                            { centered: true },
                             _react2.default.createElement(_semanticUiReact.Image, { className: 'center',
                                 shape: 'circular',
                                 style: style.avatar,
@@ -31941,27 +31957,27 @@ var Detail = function (_Component) {
                                 _semanticUiReact.Header,
                                 { as: 'h1', color: 'teal', inverted: true },
                                 this.state.detail.login || 'Nguyen Dang Khoa'
+                            ),
+                            _react2.default.createElement(
+                                _semanticUiReact.Divider,
+                                { horizontal: true, inverted: true },
+                                'INFORMATION'
+                            ),
+                            _react2.default.createElement(
+                                _semanticUiReact.Container,
+                                null,
+                                this.renderInformation()
+                            ),
+                            _react2.default.createElement(
+                                _semanticUiReact.Divider,
+                                { horizontal: true, inverted: true },
+                                'REPOSITORIES'
+                            ),
+                            _react2.default.createElement(
+                                _semanticUiReact.Container,
+                                null,
+                                this.renderRepositories()
                             )
-                        ),
-                        _react2.default.createElement(
-                            _semanticUiReact.Divider,
-                            { horizontal: true, inverted: true },
-                            'INFORMATION'
-                        ),
-                        _react2.default.createElement(
-                            _semanticUiReact.Container,
-                            null,
-                            this.renderInformation()
-                        ),
-                        _react2.default.createElement(
-                            _semanticUiReact.Divider,
-                            { horizontal: true, inverted: true },
-                            'REPOSITORIES'
-                        ),
-                        _react2.default.createElement(
-                            _semanticUiReact.Container,
-                            null,
-                            this.renderRepositories()
                         )
                     )
                 )
@@ -87570,6 +87586,66 @@ exports["default"] = function (key, replacer, reviver) {
         }
     };
 };
+
+/***/ }),
+/* 990 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _semanticUiReact = __webpack_require__(230);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var NavBar = function (_Component) {
+    _inherits(NavBar, _Component);
+
+    function NavBar() {
+        _classCallCheck(this, NavBar);
+
+        return _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).apply(this, arguments));
+    }
+
+    _createClass(NavBar, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                _semanticUiReact.Menu,
+                { fixed: 'top', inverted: true, borderless: true },
+                _react2.default.createElement(
+                    _semanticUiReact.Menu.Item,
+                    null,
+                    _react2.default.createElement(_semanticUiReact.Image, { onClick: function onClick() {
+                            window.router.history.replace('/');
+                        },
+                        width: '64px',
+                        src: 'https://static1.squarespace.com/static/568a1a4c4bf118b4ed6264a3/t/568a231e05f8e23aa29302fa/1499681692304/?format=1500w' })
+                )
+            );
+        }
+    }]);
+
+    return NavBar;
+}(_react.Component);
+
+exports.default = NavBar;
 
 /***/ })
 /******/ ]);

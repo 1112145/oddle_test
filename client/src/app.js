@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { setUsers } from './actions';
+import { NavBar } from './components';
 import { MainView, Detail } from './containers';
 import './app.scss';
 
@@ -24,12 +25,15 @@ class OddleTestApp extends Component {
 
     render() {
         return (
-            <Router ref={(router) => window.router = router}>
-                <div>
-                    <Route exact path='/' component={MainView}></Route>
-                    <Route exact path='/detail' component={Detail}></Route>
-                </div>
-            </Router>
+            <div>
+                <NavBar/>
+                <Router ref={(router) => window.router = router}>
+                    <div style={{marginTop: '64px'}}>
+                        <Route exact path='/' component={MainView}></Route>
+                        <Route exact path='/detail' component={Detail}></Route>
+                    </div>
+                </Router>
+            </div>
 
         );
     }

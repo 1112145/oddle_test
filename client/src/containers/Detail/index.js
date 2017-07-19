@@ -25,20 +25,22 @@ class Detail extends Component {
 
     render() {
         return (
-            <div>
-                <Grid centered verticalAlign='middle'>
+            <div className='center'>
+                <Grid className='center' centered verticalAlign='middle'>
                     <Grid.Column computer={8} tablet={6} mobile={16} verticalAlign='middle'>
-                        <Grid.Row>
+                        <Grid.Row centered>
                             <Image className='center'
                                 shape='circular'
                                 style={style.avatar}
                                 src={this.state.detail.avatar_url || 'https://image.flaticon.com/icons/svg/145/145843.svg'} />
                             <Header as='h1' color='teal' inverted>{this.state.detail.login || 'Nguyen Dang Khoa'}</Header>
+                            <Divider horizontal inverted>INFORMATION</Divider>
+                            <Container>{this.renderInformation()}</Container>
+                            <Divider horizontal inverted>REPOSITORIES</Divider>
+                            <Container>{this.renderRepositories()}</Container>
                         </Grid.Row>
-                        <Divider horizontal inverted>INFORMATION</Divider>
-                        <Container>{this.renderInformation()}</Container>
-                        <Divider horizontal inverted>REPOSITORIES</Divider>
-                        <Container>{this.renderRepositories()}</Container>
+
+
                     </Grid.Column>
                 </Grid>
             </div>
@@ -51,10 +53,10 @@ class Detail extends Component {
         var items = [];
         keys.forEach((key, index) => {
             items.push(<List.Item key={index} verticalAlign='middle' style={style.listItem}>
-                <List.Icon name="circle" inverted color='green'/>
+                <List.Icon name="circle" inverted color='green' />
                 <List.Content >
                     <Header as='h3' color='yellow' textAlign='left'>{key.toUpperCase()}</Header>
-                    <Header as='h5' color='teal' textAlign='left'>{(!_.isEmpty(this.state.detail[key]))?this.state.detail[key]:'NONE'}</Header>
+                    <Header as='h5' color='teal' textAlign='left'>{(!_.isEmpty(this.state.detail[key])) ? this.state.detail[key] : 'NONE'}</Header>
                 </List.Content>
             </List.Item>)
         });
