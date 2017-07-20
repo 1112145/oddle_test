@@ -17,6 +17,9 @@ const api = 'https://api.github.com/search/users?q=';
 const style = { row: { padding: '20px' } }
 
 class MainView extends Component {
+
+    requestHash = {}
+
     render() {
         return (
             <div className='main-view'>
@@ -37,10 +40,23 @@ class MainView extends Component {
     }
 
     onSearch(data) {
-        axios.get(api + data.value).then((result) => {
-            this.props.dispatch(setUsers(result.data.items));
+        if(data.value === '') {
+            this.search.setState({isLoading: false});
+            return;
+        }
+
+        if (this.requestHash[api + data.value]) {
+            this.props.dispatch(setUsers(this.requestHash[api + data.value]));
             this.search.intellisense();
-        });
+        }
+        else {
+            axios.get(api + data.value).then((result) => {
+                this.props.dispatch(setUsers(result.data.items));
+                this.requestHash[api + data.value] = result.data.items;
+                this.search.intellisense();
+            });
+        }
+
     }
 
     onSelectUser(user) {

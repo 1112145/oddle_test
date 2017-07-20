@@ -23,6 +23,7 @@ class SearchBox extends Component {
     render() {
         return (
             <Search input={{ style: { width: '100%' } }}
+                loading={this.state.isLoading}
                 style={this.props.style}
                 results={this.state.results}
                 placeholder='Enter an username'
